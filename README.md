@@ -18,7 +18,7 @@
 git clone https://github.com/zkushnir/AI-Door-Lock.git
 cd ai-door-lock
 
-  ### 2. Create and Activate a Virtual Environment
+**### 2. Create and Activate a Virtual Environment**
 
 python -m venv venv
 venv\Scripts\activate       # Windows
