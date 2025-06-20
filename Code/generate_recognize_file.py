@@ -2,28 +2,33 @@ import face_recognition
 import os
 import pickle
 
-known_faces_dir = "known_faces/zach"  # <-- Updated to your specific folder
+known_faces_root = "known_faces"  # Root folder containing subfolders per person
 known_encodings = []
 known_names = []
 
-for filename in os.listdir(known_faces_dir):
-    if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-        filepath = os.path.join(known_faces_dir, filename)
-        print(f"Processing {filepath}...")
+for person_name in os.listdir(known_faces_root):
+    person_dir = os.path.join(known_faces_root, person_name)
+    if not os.path.isdir(person_dir):
+        continue  # Skip files, only folders
 
-        image = face_recognition.load_image_file(filepath)
-        encodings = face_recognition.face_encodings(image)
+    print(f"Processing folder: {person_name}")
 
-        if len(encodings) > 0:
-            known_encodings.append(encodings[0])
-            # Use filename without extension as the person's name
-            name = os.path.splitext(filename)[0]
-            known_names.append(name)
-            print(f"Added encoding for {name}")
-        else:
-            print(f"No faces found in {filename}, skipping.")
+    for filename in os.listdir(person_dir):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            filepath = os.path.join(person_dir, filename)
+            print(f"  Processing file: {filepath}")
 
-# Save both encodings and names into a dictionary
+            image = face_recognition.load_image_file(filepath)
+            encodings = face_recognition.face_encodings(image)
+
+            if len(encodings) > 0:
+                known_encodings.append(encodings[0])
+                known_names.append(person_name)
+                print(f"    Added encoding for {person_name}")
+            else:
+                print(f"    No faces found in {filename}, skipping.")
+
+# Save all known encodings and names
 data = {
     "encodings": known_encodings,
     "names": known_names
