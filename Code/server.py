@@ -4,6 +4,9 @@ import subprocess
 import shutil
 from datetime import datetime
 import requests  # <-- Add this for HTTP requests to ESP32 lock
+import sys
+print("python ex:",sys.executable)
+print("python sys.path:",sys.path)
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
