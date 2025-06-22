@@ -2,4 +2,6 @@ echo "venv/
 __pycache__/
 *.pyc
 .env
+Code/venv/
+Code/known_faces/
 .DS_Store" > .gitignore
