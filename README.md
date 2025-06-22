@@ -14,11 +14,11 @@
 
 ### 1. Clone This Repository
 
-```bash
+
 git clone https://github.com/zkushnir/AI-Door-Lock.git
 cd ai-door-lock
 
-**### 2. Create and Activate a Virtual Environment**
+### 2. Create and Activate a Virtual Environment**
 
 python -m venv venv
 venv\Scripts\activate       # Windows
@@ -43,7 +43,7 @@ Listens for unlock command via Wi-Fi
 
 Controls a servo to unlock the deadbolt
 
-📸 Dependencies (Server Side)
+## 📸 Dependencies (Server Side)
 face_recognition
 
 flask or similar web framework
@@ -54,16 +54,16 @@ opencv-python
 
 (See requirements.txt for the full list)
 
-🔐 Security Notes
+## 🔐 Security Notes
 Use a secure Wi-Fi connection
 
 Consider encrypting image transmissions between ESP32 and Raspberry Pi
 
 Limit the face database to trusted users only
 
-🧠 Author
+## 🧠 Author
 Made with ❤️ by Zach Kush
 📍 CMU | Smart systems for a smarter home
 
-📄 License
+## 📄 License
 MIT License © 2025 Zach Kush
