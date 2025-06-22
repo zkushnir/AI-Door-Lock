@@ -3,11 +3,16 @@ import os
 import subprocess
 import shutil
 from datetime import datetime
+import requests  # <-- Add this for HTTP requests to ESP32 lock
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 KNOWN_FACES_DIR = "known_faces"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Set your ESP32 lock IP and port here:
+ESP32_LOCK_IP = "10.0.0.78"
+ESP32_LOCK_PORT = 5001
 
 def get_next_filename(folder="uploads"):
     existing = [f for f in os.listdir(folder) if f.startswith("img_") and f.endswith(".jpg")]
@@ -42,6 +47,17 @@ def upload_image():
         dest_path = os.path.join(dest_folder, f"auto_{timestamp}.jpg")
         shutil.copy(filepath, dest_path)
         print(f"Saved image to {dest_path}")
+
+        # Send unlock request to ESP32 lock
+        try:
+            unlock_url = f"http://{ESP32_LOCK_IP}:{ESP32_LOCK_PORT}/unlock"
+            resp = requests.get(unlock_url, timeout=3)
+            if resp.status_code == 200:
+                print(f"Unlock request sent successfully to {unlock_url}")
+            else:
+                print(f"Unlock request failed with status code {resp.status_code}")
+        except Exception as e:
+            print(f"Error sending unlock request: {e}")
 
     return jsonify({"result": result})
 
