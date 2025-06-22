@@ -10,7 +10,7 @@ const char* ssid = "Thebasement";
 const char* password = "Fmab1357";
 
 // Server endpoint
-const char* serverUrl = "http://10.0.0.136:5000/upload";
+const char* serverUrl = "http://10.0.0.195:5000/upload";
 
 // GPIO for the button and flash
 const int buttonPin = 12;
@@ -360,15 +360,17 @@ void loop() {
           const char* result = doc["result"];
 
           if (strncmp(result, "Welcome ", 8) == 0) {
-              drawSmiley();
-              display.setCursor(10, 55);
-              display.setTextSize(1);
+              //drawSmiley();
+              display.clearDisplay();
+              display.setCursor(0,0);
+              display.setTextSize(2);
               display.print(result);  // prints full string e.g. "Welcome Zach"
               display.display();
           } else if (strcmp(result, "Not authorised") == 0) {
-              drawSad();
-              display.setCursor(20, 55);
-              display.setTextSize(1);
+              //drawSad();
+              display.clearDisplay();
+              display.setCursor(0, 0);
+              display.setTextSize(2);
               display.println("Not authorised");
               display.display();
           } else {
