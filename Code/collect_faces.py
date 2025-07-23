@@ -2,7 +2,7 @@ import cv2
 import os
 
 # ======== SETTINGS ========
-person_name = "Dylan"  # <-- change to your name
+person_name = "Anton"  # <-- change to your name
 save_dir = os.path.join("known_faces", person_name)
 os.makedirs(save_dir, exist_ok=True)
 
